@@ -11,8 +11,10 @@ typedef struct Carta {
     char codigo[10];
     char nome[50];
     int populacao;
+    float densidade_populacional;
     float area;
     float pib;
+    float pib_per_capita;
     int pontos_turisticos;
 } carta_t;
 
@@ -41,9 +43,13 @@ void cadastrar_carta(carta_t *cartas, int i) {
     printf("Insira a área: ");
     scanf("%f", &c.area);
 
+    c.densidade_populacional = c.populacao / c.area;
+
     printf("\n");
     printf("Insira o PIB: ");
     scanf("%f", &c.pib);
+
+    c.pib_per_capita = c.pib / c.populacao;
 
     printf("\n");
     printf("Insira os pontos turísticos: ");
@@ -53,13 +59,15 @@ void cadastrar_carta(carta_t *cartas, int i) {
 }
 
 void exibir_carta(carta_t carta) {
-    printf("Estado:            %c\n", carta.estado);
-    printf("Código:            %s\n", carta.codigo);
-    printf("Nome:              %s\n", carta.nome);
-    printf("População:         %d\n", carta.populacao);
-    printf("Área:              %f km²\n", carta.area);
-    printf("PIB:               %f\n", carta.pib);
-    printf("Pontos Turísticos: %d\n", carta.pontos_turisticos);
+    printf("Estado:                 %c\n", carta.estado);
+    printf("Código:                 %s\n", carta.codigo);
+    printf("Nome:                   %s\n", carta.nome);
+    printf("População:              %d\n", carta.populacao);
+    printf("Área:                   %f km²\n", carta.area);
+    printf("Densidade Populacional: %f hab/km²\n", carta.densidade_populacional);
+    printf("PIB:                    %f\n", carta.pib);
+    printf("PIB per capta:          %f reais\n", carta.pib_per_capita);
+    printf("Pontos Turísticos:      %d\n", carta.pontos_turisticos);
 }
 
 int main() {
